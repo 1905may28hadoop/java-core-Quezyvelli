@@ -1,7 +1,12 @@
 package com.revature.eval.java.core;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class EvaluationService {
 
@@ -15,7 +20,14 @@ public class EvaluationService {
 	 */
 	public String acronym(String phrase) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		String wordElement = phrase.toUpperCase();
+	    String array1[]= wordElement.split(" |-");
+	    String ack = "";
+	    
+		for (int i = 0; i < array1.length;i++) {
+			ack += array1[i].charAt(0);
+		}
+		return ack;
 	}
 
 	/**
@@ -35,7 +47,61 @@ public class EvaluationService {
 	 */
 	public int getScrabbleScore(String string) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		String str = string.toUpperCase();
+		String[] word = str.split("");
+		int count = 0;
+		for(int i = 0;i < word.length;i++) {
+			switch (word[i])
+			  {//A, E, I, O, U, L, N, R, S, T = 1
+			    case "A":
+			    case "E":
+			    case "I":
+			    case "O":
+			    case "U":
+			    case "L":
+			    case "N":
+			    case "R":
+				case "S":
+				case "T":
+					count += 1;
+				    break;
+				//D, G = 2
+				case "D":
+				case "G":
+					count += 2;
+					break;
+				//B, C, M, P = 3
+				case "B":
+				case "C":
+				case "M":
+				case "P":
+					count += 3;
+					break;
+				//F, H, V, W, Y = 4
+				case "F":
+				case "H":
+				case "V":
+				case "W":
+				case "Y":
+					count += 4;
+					break;
+				//K = 5;  
+				case "K":
+					count += 5;
+					break;
+				//J, X = 8;
+				case "J":
+				case "X":
+					count +=8;
+					break;
+				//Q, Z = 10
+				case "Q":
+				case "Z":
+					count += 10;
+					break;
+			  }
+		}
+		return count;
 	}
 
 	/**
@@ -71,7 +137,20 @@ public class EvaluationService {
 	 */
 	public String cleanPhoneNumber(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		char[] gfg = string.toCharArray(); 
+		String dial = "";
+		for(int i = 0; i < gfg.length;i++) {
+			if(gfg[i] > 47 && gfg[i] < 58) {
+				String s=Character.toString(gfg[i]);
+					dial += s;
+				}
+			}
+			//System.out.print(dial);
+		if(dial.length() != 10) {
+			throw new IllegalArgumentException();
+		}
+			
+		return dial;
 	}
 
 	/**
@@ -85,7 +164,22 @@ public class EvaluationService {
 	 */
 	public Map<String, Integer> wordCount(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		String[] words = string.split("\\W+");
+		Integer word = 1;
+	
+		Map<String, Integer> myMap = new HashMap<String, Integer>();
+		for(int i = 0; i < words.length;i++) {
+			Integer count = 0;
+			
+			if( myMap.containsKey(words[i])) {
+				word += 1;
+				myMap.replace(words[i], word);
+			}else {
+				count += 1;
+				myMap.put(words[i], count );
+			}
+		}
+		return myMap;
 	}
 
 	/**
@@ -128,8 +222,74 @@ public class EvaluationService {
 
 		public int indexOf(T t) {
 			// TODO Write an implementation for this method declaration
-			return 0;
+			int locaTion = 0;
+			 if( t instanceof String) {
+				 List<String> list = new ArrayList<>();
+					list.addAll((Collection<? extends String>) getSortedList());
+					String k = t.toString();
+					int neeD = Integer.parseInt(t.toString());
+					int min = 0;
+					int max = getSortedList().size();
+
+					
+					int miDDle = (max + min) / 2;
+
+					while (min <= max) {
+
+						if (Integer.parseInt(list.get(miDDle)) == neeD) {
+							return locaTion = miDDle;
+
+						} else if (Integer.parseInt(list.get(miDDle)) > neeD) {
+							miDDle -= 1;
+						} else if (Integer.parseInt(list.get(miDDle)) < neeD) {
+							miDDle += 1;
+						}
+					}
+
+					return locaTion;
+					
+				  }
+				  else if( t instanceof Integer) {
+					  List<Integer> list = new ArrayList<>();
+						list.addAll((Collection<? extends Integer>) getSortedList());
+						String k = t.toString();
+						int neeD = Integer.parseInt(t.toString());
+						int min = 0;
+						int max = getSortedList().size();
+
+						
+						int miDDle = (max + min) / 2;
+
+						while (min <= max) {
+
+							if (list.get(miDDle) == neeD) {
+								return locaTion = miDDle;
+
+							} else if (list.get(miDDle) > neeD) {
+								miDDle -= 1;
+							} else if (list.get(miDDle) < neeD) {
+								miDDle += 1;
+							}
+						}
+
+						return locaTion;
+				  }
+			return locaTion;
 		}
+		public Class getColumnClass(int column) {
+            switch (column) {
+                case 0:
+                    return String.class;
+                case 1:
+                    return String.class;
+                case 2:
+                    return Integer.class;
+                case 3:
+                    return Double.class;
+                default:
+                    return Boolean.class;
+            }
+        }
 
 		public BinarySearch(List<T> sortedList) {
 			super();
@@ -163,7 +323,20 @@ public class EvaluationService {
 	 */
 	public boolean isArmstrongNumber(int input) {
 		// TODO Write an implementation for this method declaration
-		return false;
+		boolean amStrong = false;
+		int power = Integer.toString(input).length();
+		String array1[]= Integer.toString(input).split("");
+		int word = 0;
+		int result = 0;
+		
+		for(int i =0; i < array1.length;i++ ) {
+			int powerr = Integer.parseInt(array1[i]);
+			word += Math.pow(powerr, power);
+	}
+		if(input == word) {
+			amStrong = true;
+		}
+		return amStrong;
 	}
 
 	/**
@@ -178,8 +351,19 @@ public class EvaluationService {
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
 		// TODO Write an implementation for this method declaration
-		return null;
-	}
+		List<Long> prIme = new ArrayList<>();
+        long l1 = l;
+ 
+        for (int i = 2; i <= l1; i++) {
+            if (l1 % i == 0) {
+                prIme.add((long) i); // prime factor
+                l1 /= i;
+                i--;
+            }
+        }
+         
+        return prIme;
+    }
 
 
 	/**
@@ -216,7 +400,125 @@ public class EvaluationService {
 		 */
 		public static String encode(String string) {
 			// TODO Write an implementation for this method declaration
-			return null;
+			String str = string.toUpperCase();
+			String[] word = str.split("| ");
+			String encode = "";
+		
+			for(int i = 0;i < word.length;i++) {
+				switch (word[i])
+				  {
+				    case "A":
+				    	encode += "z";
+				    	break;
+				    case "B":
+				    	encode += "y";
+				    	break;
+				    case "C":
+				    	encode += "x";
+				    	break;
+				    case "D":
+				    	encode += "w";
+				    	break;
+				    case "E":
+				    	encode += "v";
+				    	break;
+				    case "F":
+				    	encode += "u";
+				    	break;
+				    case "G":
+				    	encode += "t";
+				    	break;
+				    case "H":
+				    	encode += "s";
+				    	break;
+					case "I":
+						encode += "r";
+				    	break;
+					case "J":
+						encode += "q";
+				    	break;
+					case "K":
+						encode += "p";
+				    	break;
+					case "L":
+						encode += "o";
+				    	break;
+					case "M":
+						encode += "n";
+				    	break;
+					case "N":
+						encode += "m";
+				    	break;
+					case "O":
+						encode += "l";
+				    	break;
+					case "P":
+						encode += "k";
+				    	break;
+					case "Q":
+						encode += "j";
+				    	break;
+					case "R":
+						encode += "i";
+				    	break;
+					case "S":
+						encode += "h";
+				    	break;
+					case "T":
+						encode += "g";
+				    	break;
+					case "U":
+						encode += "f";
+				    	break;
+					case "V":
+						encode += "e";
+				    	break;
+					case "W":
+						encode += "d";
+				    	break;
+					case "X":
+						encode += "c";
+				    	break;
+					case "Y":
+						encode += "b";
+				    	break;
+					case "Z":
+						encode += "a";
+				    	break;
+					case "0":
+						encode += "0";
+				    	break;
+					case "1":
+						encode += "1";
+				    	break;
+					case "2":
+						encode += "2";
+				    	break;
+					case "3":
+						encode += "3";
+				    	break;
+					case "4":
+						encode += "4";
+				    	break;
+					case "5":
+						encode += "5";
+				    	break;
+					case "6":
+						encode += "6";
+				    	break;
+					case "7":
+						encode += "7";
+				    	break;
+					case "8":
+						encode += "8";
+				    	break;
+					case "9":
+						encode += "9";
+				    	break;
+				  }
+			}
+			encode = encode.replaceAll(".....", "$0 ");
+			return encode;
 		}
 
 		/**
@@ -227,7 +529,125 @@ public class EvaluationService {
 		 */
 		public static String decode(String string) {
 			// TODO Write an implementation for this method declaration
-			return null;
+			String str = string.toUpperCase();
+			String[] word = str.split("| ");
+			String decode = "";
+		
+			for(int i = 0;i < word.length;i++) {
+				switch (word[i])
+				  {
+				    case "A":
+				    	decode += "z";
+				    	break;
+				    case "B":
+				    	decode += "y";
+				    	break;
+				    case "C":
+				    	decode += "x";
+				    	break;
+				    case "D":
+				    	decode += "w";
+				    	break;
+				    case "E":
+				    	decode += "v";
+				    	break;
+				    case "F":
+				    	decode += "u";
+				    	break;
+				    case "G":
+				    	decode += "t";
+				    	break;
+				    case "H":
+				    	decode += "s";
+				    	break;
+					case "I":
+						decode += "r";
+				    	break;
+					case "J":
+						decode += "q";
+				    	break;
+					case "K":
+						decode += "p";
+				    	break;
+					case "L":
+						decode += "o";
+				    	break;
+					case "M":
+						decode += "n";
+				    	break;
+					case "N":
+						decode += "m";
+				    	break;
+					case "O":
+						decode += "l";
+				    	break;
+					case "P":
+						decode += "k";
+				    	break;
+					case "Q":
+						decode += "j";
+				    	break;
+					case "R":
+						decode += "i";
+				    	break;
+					case "S":
+						decode += "h";
+				    	break;
+					case "T":
+						decode += "g";
+				    	break;
+					case "U":
+						decode += "f";
+				    	break;
+					case "V":
+						decode += "e";
+				    	break;
+					case "W":
+						decode += "d";
+				    	break;
+					case "X":
+						decode += "c";
+				    	break;
+					case "Y":
+						decode += "b";
+				    	break;
+					case "Z":
+						decode += "a";
+				    	break;
+					case "0":
+						decode += "0";
+				    	break;
+					case "1":
+						decode += "1";
+				    	break;
+					case "2":
+						decode += "2";
+				    	break;
+					case "3":
+						decode += "3";
+				    	break;
+					case "4":
+						decode += "4";
+				    	break;
+					case "5":
+						decode += "5";
+				    	break;
+					case "6":
+						decode += "6";
+				    	break;
+					case "7":
+						decode += "7";
+				    	break;
+					case "8":
+						decode += "8";
+				    	break;
+					case "9":
+						decode += "9";
+				    	break;
+				  }
+			}
+			
+			return decode;
 		}
 	}
 
@@ -260,7 +680,44 @@ public class EvaluationService {
 	 */
 	public int solveWordProblem(String string) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		String str = string;      
+		str = str.replaceAll("[^-0-9]+", " "); 
+		List<String> array1 = Arrays.asList(str.trim().split(" "));
+		Pattern p = Pattern.compile("\\d+");
+		String value = string;
+		
+		int a =Integer.parseInt(array1.get(0)) ;
+		int b =Integer.parseInt(array1.get(1));
+		int answer = 0;
+		String realMath = "";
+		String[] elements = p.split(value);
+		String[] math = value.split(" |-");
+		
+		for(int i = 0; i< math.length;i++) {
+			if(math[i].equals("plus") ||
+					math[i].equals("divided")||
+					math[i].equals("multiplied")||
+					math[i].equals("minus")
+					) {
+				realMath = math[i];
+				switch (realMath)
+				  {
+				case "plus":
+					answer= a + b;
+					break;
+				case"divided":
+					answer=  a/b;
+					break;
+				case "multiplied":
+					answer=  a*b;
+					break;
+				case "minus":
+					answer=  a-b;
+					break;
+				  }
+			}
+		}
+		return answer;
 	}
 
 }

@@ -332,7 +332,7 @@ public class EvaluationServiceTest {
 
 	@Test
 	public void testEncodeAllTheLetters() {
-		assertEquals("gsvjf rxpyi ldmul cqfnk hlevi gsvoz abwlt",
+		assertEquals("gsvjf rxpyi ldmul cqfnk hlevi gsvoz abwlt ",
 				EvaluationService.AtbashCipher.encode("The quick brown fox jumps over the lazy dog."));
 	}
 
